@@ -35,11 +35,9 @@ public class Product {
     @Enumerated(EnumType.STRING)
     ProductStatus productStatus;
 
-    boolean isLimitedEdition;
+    boolean isLimitedEdition = false;
 
-    boolean isPreorder;
-
-//    boolean deleted = false;
+    boolean isPreorder = false;
 
     Integer stockQuantity;
 

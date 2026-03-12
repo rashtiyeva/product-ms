@@ -10,8 +10,7 @@ public record ProductUpdateRequest(
         String description,
         BigDecimal price,
         Currency currency,
-        ProductStatus productStatus,
-        Boolean isLimitedEdition,
-        Boolean isPreorder,
+        boolean isLimitedEdition,
+        boolean isPreorder,
         Integer stockQuantity
 ) {}

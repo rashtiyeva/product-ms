@@ -10,8 +10,8 @@ public record ProductCreateRequest(
         String description,
         BigDecimal price,
         Currency currency,
-        Boolean isLimitedEdition,
-        Boolean isPreorder,
+        boolean isLimitedEdition,
+        boolean isPreorder,
         Integer stockQuantity
 ) {
 }

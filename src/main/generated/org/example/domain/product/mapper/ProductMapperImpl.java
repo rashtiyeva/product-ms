@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-12T13:30:47+0400",
+    date = "2026-03-12T16:24:58+0400",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.10 (Eclipse Adoptium)"
 )
 @Component
@@ -37,15 +37,6 @@ public class ProductMapperImpl implements ProductMapper {
         }
         if ( request.currency() != null ) {
             product.setCurrency( request.currency() );
-        }
-        if ( request.productStatus() != null ) {
-            product.setProductStatus( request.productStatus() );
-        }
-        if ( request.isLimitedEdition() != null ) {
-            product.setIsLimitedEdition( request.isLimitedEdition() );
-        }
-        if ( request.isPreorder() != null ) {
-            product.setIsPreorder( request.isPreorder() );
         }
         if ( request.stockQuantity() != null ) {
             product.setStockQuantity( request.stockQuantity() );
@@ -84,8 +75,6 @@ public class ProductMapperImpl implements ProductMapper {
         String description = null;
         BigDecimal price = null;
         Currency currency = null;
-        Boolean isLimitedEdition = null;
-        Boolean isPreorder = null;
         Integer stockQuantity = null;
 
         id = product.getId();
@@ -94,9 +83,10 @@ public class ProductMapperImpl implements ProductMapper {
         description = product.getDescription();
         price = product.getPrice();
         currency = product.getCurrency();
-        isLimitedEdition = product.getIsLimitedEdition();
-        isPreorder = product.getIsPreorder();
         stockQuantity = product.getStockQuantity();
+
+        Boolean isLimitedEdition = null;
+        Boolean isPreorder = null;
 
         ProductResponse productResponse = new ProductResponse( id, title, slug, description, price, currency, isLimitedEdition, isPreorder, stockQuantity );
 
