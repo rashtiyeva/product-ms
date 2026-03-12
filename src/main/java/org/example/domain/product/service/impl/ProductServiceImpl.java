@@ -10,6 +10,9 @@ import org.example.domain.product.model.request.ProductCreateRequest;
 import org.example.domain.product.model.request.ProductUpdateRequest;
 import org.example.domain.product.model.response.ProductResponse;
 import org.example.domain.product.service.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -29,11 +32,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductResponse> getProductsByStatus(ProductStatus status) {
-       List<Product> activeProducts = productRepository.findAllByProductStatus(status);
-       return activeProducts.stream()
-               .map(productMapper::mapToProductResponse)
-               .toList();
+    public Page<ProductResponse> getProductsByStatus(ProductStatus status, Pageable pageable) {
+       Page<Product> activeProducts = productRepository.findAllByProductStatus(status, pageable);
+       return activeProducts.map(productMapper::mapToProductResponse);
     }
 
     @Override
