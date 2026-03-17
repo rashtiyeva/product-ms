@@ -10,6 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -26,7 +28,9 @@ public class Product {
     String title;
 
     String slug;
+
     String description;
+
     BigDecimal price;
 
     @Enumerated(EnumType.STRING)
@@ -46,4 +50,10 @@ public class Product {
 
     @UpdateTimestamp
     LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductCategory> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ProductAttributeValue> attributes = new HashSet<>();
 }

@@ -1,6 +1,8 @@
 package org.example.domain.product.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.example.domain.product.model.enums.ProductStatus;
@@ -36,11 +38,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.saveProduct(request));
     }
 
-    @GetMapping("/active")
+    @GetMapping()
     public ResponseEntity<Page<ProductResponse>> getProductsByStatus(
             @RequestParam ProductStatus status,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "20") int size
+            @RequestParam(defaultValue = "0") @Min(0) int page,
+            @RequestParam(defaultValue = "20") @Min(1) @Max(100) int size
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         Page<ProductResponse> products = productService.getProductsByStatus(status, pageable);
