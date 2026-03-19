@@ -5,17 +5,38 @@ import javax.annotation.processing.Generated;
 import org.example.domain.product.dao.entity.Product;
 import org.example.domain.product.model.enums.Currency;
 import org.example.domain.product.model.request.ProductCreateRequest;
+import org.example.domain.product.model.request.ProductPatchRequest;
 import org.example.domain.product.model.request.ProductUpdateRequest;
 import org.example.domain.product.model.response.ProductResponse;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-12T16:24:58+0400",
+    date = "2026-03-19T12:13:00+0400",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.10 (Eclipse Adoptium)"
 )
 @Component
 public class ProductMapperImpl implements ProductMapper {
+
+    @Override
+    public Product mapToProduct(ProductCreateRequest request) {
+        if ( request == null ) {
+            return null;
+        }
+
+        Product.ProductBuilder product = Product.builder();
+
+        product.title( request.title() );
+        product.slug( request.slug() );
+        product.description( request.description() );
+        product.price( request.price() );
+        product.currency( request.currency() );
+        product.isLimitedEdition( request.isLimitedEdition() );
+        product.isPreorder( request.isPreorder() );
+        product.stockQuantity( request.stockQuantity() );
+
+        return product.build();
+    }
 
     @Override
     public void updateProduct(ProductUpdateRequest request, Product product) {
@@ -38,29 +59,31 @@ public class ProductMapperImpl implements ProductMapper {
         if ( request.currency() != null ) {
             product.setCurrency( request.currency() );
         }
-        if ( request.stockQuantity() != null ) {
-            product.setStockQuantity( request.stockQuantity() );
-        }
+        product.setStockQuantity( request.stockQuantity() );
     }
 
     @Override
-    public Product mapToProduct(ProductCreateRequest request) {
+    public void patchProduct(ProductPatchRequest request, Product product) {
         if ( request == null ) {
-            return null;
+            return;
         }
 
-        Product.ProductBuilder product = Product.builder();
-
-        product.title( request.title() );
-        product.slug( request.slug() );
-        product.description( request.description() );
-        product.price( request.price() );
-        product.currency( request.currency() );
-        product.isLimitedEdition( request.isLimitedEdition() );
-        product.isPreorder( request.isPreorder() );
-        product.stockQuantity( request.stockQuantity() );
-
-        return product.build();
+        if ( request.title() != null ) {
+            product.setTitle( request.title() );
+        }
+        if ( request.slug() != null ) {
+            product.setSlug( request.slug() );
+        }
+        if ( request.description() != null ) {
+            product.setDescription( request.description() );
+        }
+        if ( request.price() != null ) {
+            product.setPrice( request.price() );
+        }
+        if ( request.currency() != null ) {
+            product.setCurrency( request.currency() );
+        }
+        product.setStockQuantity( request.stockQuantity() );
     }
 
     @Override

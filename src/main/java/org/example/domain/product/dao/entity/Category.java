@@ -50,16 +50,16 @@ public class Category {
     LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductCategory> products = new HashSet<>();
+    Set<ProductCategory> products = new HashSet<>();
 
     @OneToMany(mappedBy = "parent")
-    private Set<Category> children = new HashSet<>();
+    Set<Category> children = new HashSet<>();
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CategoryAttribute> attributes = new HashSet<>();
+    Set<CategoryAttribute> attributes = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "parent_id")
-    private Category parent;
+    Category parent;
 
 }

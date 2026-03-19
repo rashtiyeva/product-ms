@@ -1,6 +1,7 @@
 package org.example.domain.product.dao.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.example.domain.product.model.enums.Currency;
@@ -43,7 +44,8 @@ public class Product {
 
     boolean isPreorder = false;
 
-    Integer stockQuantity;
+    @Min(1)
+    int stockQuantity;
 
     @CreationTimestamp
     LocalDateTime createdAt;

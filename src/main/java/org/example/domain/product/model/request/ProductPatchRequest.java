@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import org.example.domain.product.model.enums.Currency;
 import java.math.BigDecimal;
 
-public record ProductUpdateRequest(
+public record ProductPatchRequest (
         String title,
         String slug,
         String description,

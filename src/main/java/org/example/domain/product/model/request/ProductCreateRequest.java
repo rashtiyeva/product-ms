@@ -1,5 +1,6 @@
 package org.example.domain.product.model.request;
 
+import jakarta.validation.constraints.Min;
 import org.example.domain.product.model.enums.Currency;
 
 import java.math.BigDecimal;
@@ -12,7 +13,8 @@ public record ProductCreateRequest(
         Currency currency,
         boolean isLimitedEdition,
         boolean isPreorder,
-        Integer stockQuantity
+        @Min(1)
+        int stockQuantity
 ) {
 }
 

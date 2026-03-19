@@ -2,6 +2,7 @@ package org.example.domain.product.mapper;
 
 import org.example.domain.product.dao.entity.Product;
 import org.example.domain.product.model.request.ProductCreateRequest;
+import org.example.domain.product.model.request.ProductPatchRequest;
 import org.example.domain.product.model.request.ProductUpdateRequest;
 import org.example.domain.product.model.response.ProductResponse;
 import org.mapstruct.BeanMapping;
@@ -17,10 +18,13 @@ public interface ProductMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
 
+    Product mapToProduct(ProductCreateRequest request);
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateProduct(ProductUpdateRequest request, @MappingTarget Product product);
 
-    Product mapToProduct(ProductCreateRequest request);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void patchProduct(ProductPatchRequest request, @MappingTarget Product product);
 
     ProductResponse mapToProductResponse(Product product);
 

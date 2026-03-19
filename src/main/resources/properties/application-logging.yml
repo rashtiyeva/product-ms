@@ -2,3 +2,4 @@ logging:
   level:
     root: INFO
     org.example: DEBUG
+#    org.hibernate.SQL: debug
