@@ -5,8 +5,10 @@ import org.example.domain.product.model.enums.CategoryStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    Page<Category> findAllByCategoryStatus(CategoryStatus status, Pageable pageable);
+    Page<Category> findAllByStatus(CategoryStatus status, Pageable pageable);
+    Optional<Category> findByIdAndStatus(Long id, CategoryStatus status);
 }

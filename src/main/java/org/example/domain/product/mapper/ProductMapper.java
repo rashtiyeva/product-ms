@@ -1,9 +1,11 @@
 package org.example.domain.product.mapper;
 
 import org.example.domain.product.dao.entity.Product;
+import org.example.domain.product.model.dto.ProductPreviewDto;
 import org.example.domain.product.model.request.ProductCreateRequest;
 import org.example.domain.product.model.request.ProductPatchRequest;
 import org.example.domain.product.model.request.ProductUpdateRequest;
+import org.example.domain.product.model.response.ProductPreviewResponse;
 import org.example.domain.product.model.response.ProductResponse;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -27,5 +29,6 @@ public interface ProductMapper {
     void patchProduct(ProductPatchRequest request, @MappingTarget Product product);
 
     ProductResponse mapToProductResponse(Product product);
+    ProductPreviewResponse mapToProductPreviewResponse(ProductPreviewDto productReview);
 
 }

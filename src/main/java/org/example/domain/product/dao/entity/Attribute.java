@@ -1,19 +1,15 @@
 package org.example.domain.product.dao.entity;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.example.domain.product.model.enums.AttributeStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -38,10 +34,13 @@ public class Attribute {
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "attribute",
+            cascade = { CascadeType.PERSIST, CascadeType.MERGE},
+            orphanRemoval = true)
     Set<AttributeValue> values = new HashSet<>();
 
-    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "attribute")
     Set<CategoryAttribute> categories = new HashSet<>();
 
 }

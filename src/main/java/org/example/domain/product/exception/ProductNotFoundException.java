@@ -1,6 +1,8 @@
 package org.example.domain.product.exception;
 
-public class ProductNotFoundException extends RuntimeException {
+import org.example.domain.product.exception.base.NotFoundException;
+
+public class ProductNotFoundException extends NotFoundException {
     public ProductNotFoundException(Long id) {
         super("Product not found with id: " + id);
     }

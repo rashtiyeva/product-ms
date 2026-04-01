@@ -43,6 +43,6 @@ public class AttributeValue {
     @JoinColumn(name = "attribute_id")
     Attribute attribute;
 
-    @OneToMany(mappedBy = "attributeValue", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "attributeValue")
     Set<ProductAttributeValue> productAttributes = new HashSet<>();
 }

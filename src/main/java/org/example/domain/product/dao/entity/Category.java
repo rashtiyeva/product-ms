@@ -41,7 +41,7 @@ public class Category {
     String description;
 
     @Enumerated(EnumType.STRING)
-    CategoryStatus categoryStatus;
+    CategoryStatus status;
 
     @CreationTimestamp
     LocalDateTime createdAt;
@@ -49,16 +49,20 @@ public class Category {
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category")
     Set<ProductCategory> products = new HashSet<>();
 
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     Set<Category> children = new HashSet<>();
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "category",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            orphanRemoval = true
+    )
     Set<CategoryAttribute> attributes = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     Category parent;
 

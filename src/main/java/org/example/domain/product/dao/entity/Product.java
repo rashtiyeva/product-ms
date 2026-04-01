@@ -38,7 +38,7 @@ public class Product {
     Currency currency;
 
     @Enumerated(EnumType.STRING)
-    ProductStatus productStatus;
+    ProductStatus status;
 
     boolean isLimitedEdition = false;
 
@@ -53,7 +53,11 @@ public class Product {
     @UpdateTimestamp
     LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "product",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            orphanRemoval = true
+    )
     private Set<ProductCategory> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)

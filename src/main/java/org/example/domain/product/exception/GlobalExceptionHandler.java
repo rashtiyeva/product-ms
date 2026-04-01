@@ -1,13 +1,15 @@
 package org.example.domain.product.exception;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.example.domain.product.exception.base.NotFoundException;
 import org.example.domain.product.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import java.time.LocalDateTime;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestControllerAdvice
@@ -30,22 +32,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(response);
     }
 
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFound(ProductNotFoundException ex,
-                                                               HttpServletRequest request) {
-        return buildErrorResponse(ex, HttpStatus.NOT_FOUND, "Product not found", request);
-    }
-
-    @ExceptionHandler(CategoryNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCategoryNotFound(CategoryNotFoundException ex,
-                                                                HttpServletRequest request) {
-        return buildErrorResponse(ex, HttpStatus.NOT_FOUND, "Category not found", request);
-    }
-
-    @ExceptionHandler(ParentCategoryNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleParentCategoryNotFoundException(ParentCategoryNotFoundException ex,
-                                                                HttpServletRequest request) {
-        return buildErrorResponse(ex, HttpStatus.NOT_FOUND, "Parent category not found", request);
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex,
+                                                                 HttpServletRequest request) {
+        return buildErrorResponse(ex, HttpStatus.NOT_FOUND, ex.getMessage(), request);
     }
 
     @ExceptionHandler(Exception.class)
